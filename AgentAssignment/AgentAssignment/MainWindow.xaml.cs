@@ -55,8 +55,8 @@ namespace AgentAssignment
         {
             for (int i = ListBox.SelectedItems.Count-1; i >= 0; i--)
             {
-                agents.RemoveAt(i);
-                
+                agents.Remove(ListBox.SelectedItems[i] as Agent);
+
 
 
             }
