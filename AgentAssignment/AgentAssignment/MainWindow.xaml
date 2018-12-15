@@ -4,17 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgentAssignment"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <local:Agents></local:Agents>
     </Window.DataContext>
     <Grid Name="AgentGrid">
-        <ToolBar Margin="0,0,0.333,389.667">
+        <Menu Margin="0,0,0.333,393.667"  >
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Click="New_OnClick"/>
+                <MenuItem Header="_Open" Click="Open_OnClick"/>
+                <MenuItem Header="_Save"  Click="Save_OnClick"/>
+                <MenuItem Header="_Save As" Click="SaveAs_OnClick"/>
+                <Separator/>
+                    <MenuItem Header="_Exit"  Click="Close_OnClick" />
+            </MenuItem>
+        </Menu>
+        <ToolBar Margin="0,27,0.333,355.667">
             <Button Content="&lt;"  Width="50" Name="Back" Click="Back_Click"/>
             <Button Content="&gt;"  Width="49" Name="Forward" Click="Forward_Click"/>
             <Button Content="+" Width="75" Name="New" Click="New_Click"/>
             <Button Content="-"  Width="75" Name="Delete" Click="Delete_OnClick" />
+            <Label Content="File _Name: " 
+                   FontSize="12"
+                   VerticalAlignment="Center" Target="{Binding ElementName=tbxFileName}" />
+            <TextBox Name="tbxFileName"
+                     FontSize="12"
+                     VerticalAlignment="Center"
+                     MinWidth="100"
+            />
 
         </ToolBar>
         <Label Content="Id" HorizontalAlignment="Left" Margin="57,65,0,0" VerticalAlignment="Top"/>
@@ -28,10 +47,11 @@
         <TextBox HorizontalAlignment="Left" Height="70" Margin="275,224,0,0" TextWrapping="Wrap" Text="{Binding Assignment}" VerticalAlignment="Top" Width="120"/>
 
         <ListBox Name ="ListBox" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Height="100" Margin="468,77,0,0" VerticalAlignment="Top" Width="189" DisplayMemberPath="CodeName" ItemsSource ="{Binding}"/>
-       
 
-
-
-
+        <StatusBar Margin="0,403,0.333,-0.333">
+            <StatusBarItem HorizontalAlignment="Right" Margin="0,-41,0,0">
+                <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}}" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
