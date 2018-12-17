@@ -8,45 +8,83 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
-        <local:Agents></local:Agents>
+        <local:Agents />
     </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="Button">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="14" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect ShadowDepth="6" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+        <DataTemplate x:Key="agentTemplate">
+            <WrapPanel>
+                <TextBlock Text="{Binding Path=ID}" Padding="5, 0"
+                           Width="50" />
+                <TextBlock Text="{Binding Path=CodeName}" Padding="5, 0"
+                           Width="100" />
+                <TextBlock Text="{Binding Path=Speciality}" Padding="5, 0"
+                           Width="150" />
+                <TextBlock Text="{Binding Path=Assignment}" Padding="5, 0" />
+            </WrapPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid Name="AgentGrid">
-        <Menu Margin="0,0,0.333,393.667"  >
+        <Menu Margin="0,0,0.333,393.667">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" Click="New_OnClick"/>
-                <MenuItem Header="_Open" Click="Open_OnClick"/>
-                <MenuItem Header="_Save"  Click="Save_OnClick"/>
-                <MenuItem Header="_Save As" Click="SaveAs_OnClick"/>
-                <Separator/>
-                    <MenuItem Header="_Exit"  Click="Close_OnClick" />
+                <MenuItem Header="_New" Click="New_OnClick" />
+                <MenuItem Header="_Open" Click="Open_OnClick" />
+                <MenuItem Header="_Save" Click="Save_OnClick" />
+                <MenuItem Header="_Save As" Click="SaveAs_OnClick" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="Close_OnClick" />
             </MenuItem>
         </Menu>
         <ToolBar Margin="0,27,0.333,355.667">
-            <Button Content="&lt;"  Width="50" Name="Back" Click="Back_Click"/>
-            <Button Content="&gt;"  Width="49" Name="Forward" Click="Forward_Click"/>
-            <Button Content="+" Width="75" Name="New" Click="New_Click"/>
-            <Button Content="-"  Width="75" Name="Delete" Click="Delete_OnClick" />
-            <Label Content="File _Name: " 
+            <Button Content="&lt;" Width="50" Name="Back" Click="Back_Click" />
+            <Button Content="&gt;" Width="49" Name="Forward" Click="Forward_Click" />
+            <Button Content="+" Width="75" Name="New" Click="New_Click" />
+            <Button Width="75" Name="Delete" Click="Delete_OnClick">
+                <Image Source="Images/Recycle.png" />
+            </Button>
+
+            <Label Content="File _Name: "
                    FontSize="12"
                    VerticalAlignment="Center" Target="{Binding ElementName=tbxFileName}" />
             <TextBox Name="tbxFileName"
                      FontSize="12"
                      VerticalAlignment="Center"
-                     MinWidth="100"
-            />
+                     MinWidth="100" />
 
         </ToolBar>
-        <Label Content="Id" HorizontalAlignment="Left" Margin="57,65,0,0" VerticalAlignment="Top"/>
-        <Label Content="Codename" HorizontalAlignment="Left" Margin="57,117,0,0" VerticalAlignment="Top"/>
-        <Label Content="Speciality" HorizontalAlignment="Left" Margin="57,174,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.675,6.654"/>
-        <Label Content="Assignment" HorizontalAlignment="Left" Margin="57,224,0,0" VerticalAlignment="Top"/>
+        <Label Content="Id" HorizontalAlignment="Left" Margin="57,65,0,0" VerticalAlignment="Top" Name="LabelId" />
+        <Label Content="Codename" HorizontalAlignment="Left" Margin="57,117,0,0" VerticalAlignment="Top" />
+        <Label Content="Speciality" HorizontalAlignment="Left" Margin="57,174,0,0" VerticalAlignment="Top"
+               RenderTransformOrigin="0.675,6.654" />
+        <Label Content="Assignment" HorizontalAlignment="Left" Margin="57,224,0,0" VerticalAlignment="Top" />
 
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="275,77,0,0" TextWrapping="Wrap" Text="{Binding ID}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="275,120,0,0" TextWrapping="Wrap" Text="{Binding CodeName}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="275,174,0,0" TextWrapping="Wrap" Text="{Binding Speciality}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="70" Margin="275,224,0,0" TextWrapping="Wrap" Text="{Binding Assignment}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="236,77,0,0" TextWrapping="Wrap" Text="{Binding ID}"
+                 VerticalAlignment="Top" Width="120" Name="BoxId" />
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="237,120,0,0" TextWrapping="Wrap"
+                 Text="{Binding CodeName}" VerticalAlignment="Top" Width="120" />
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="238,174,0,0" TextWrapping="Wrap"
+                 Text="{Binding Speciality}" VerticalAlignment="Top" Width="120" />
+        <TextBox HorizontalAlignment="Left" Height="70" Margin="240,224,0,0" TextWrapping="Wrap"
+                 Text="{Binding Assignment}" VerticalAlignment="Top" Width="120" />
 
-        <ListBox Name ="ListBox" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Height="100" Margin="468,77,0,0" VerticalAlignment="Top" Width="189" DisplayMemberPath="CodeName" ItemsSource ="{Binding}"/>
+        <ListBox Name="ListBox" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Height="217"
+                 Margin="380,77,0,0" VerticalAlignment="Top" Width="384" SelectedIndex="{Binding Path=CurrentIndex}"
+                 ItemTemplate="{StaticResource agentTemplate}" ItemsSource="{Binding}"/>
 
         <StatusBar Margin="0,403,0.333,-0.333">
             <StatusBarItem HorizontalAlignment="Right" Margin="0,-41,0,0">

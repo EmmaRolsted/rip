@@ -1,14 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using AgentAssignment.Annotations;
 
 namespace AgentAssignment
 {
    public class Agents : ObservableCollection<Agent> { };  // Just to reference it from xaml
 
    [Serializable]
-   public class Agent
+   public class Agent : INotifyPropertyChanged
    {
       string id;
       string codeName;
@@ -38,8 +39,22 @@ namespace AgentAssignment
             id = value;
          }
       }
+       int currentIndex = -1;
 
-      public string CodeName
+       public int CurrentIndex
+       {
+           get { return currentIndex; }
+           set
+           {
+               if (currentIndex != value)
+               {
+                   currentIndex = value;
+                   OnPropertyChanged();
+               }
+           }
+       }
+
+        public string CodeName
       {
          get
          {
@@ -74,5 +89,13 @@ namespace AgentAssignment
             assignment = value;
          }
       }
+
+       public event PropertyChangedEventHandler PropertyChanged;
+
+       [NotifyPropertyChangedInvocator]
+       protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+       {
+           PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+       }
    }
 }
