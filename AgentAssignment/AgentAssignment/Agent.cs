@@ -39,6 +39,7 @@ namespace AgentAssignment
             id = value;
          }
       }
+
        int currentIndex = -1;
 
        public int CurrentIndex
