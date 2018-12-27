@@ -2,7 +2,10 @@
 using Caliburn.Micro;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Windows;
+using System.Xml.Serialization;
 
 namespace BiavlerProjekt
 {
@@ -14,7 +17,18 @@ namespace BiavlerProjekt
         private string _count;
         private string _text;
         private ObservableCollection<BiAvler> _collection = new ObservableCollection<BiAvler>();
+        private string _fileName;
+        string filename = "";
 
+        public string FileName
+        {
+            get => _fileName;
+            set
+            {
+                _fileName = value;
+                NotifyOfPropertyChange();
+            } 
+        }
         public string Bistade1
         {
             get => _bistade;
@@ -59,7 +73,7 @@ namespace BiavlerProjekt
         {
             if (Bistade1 != null && Date1 != null && Count1 != null && Text1 != null)
             {
-                Collection.Add(new BiAvler(){Bistade = Bistade1, Date = Date1, Count = Count1, Text = Text1});
+                Collection.Add(new BiAvler() { Bistade = Bistade1, Date = Date1, Count = Count1, Text = Text1 });
                 Bistade1 = null;
                 Date1 = null;
                 Count1 = null;
@@ -75,6 +89,35 @@ namespace BiavlerProjekt
                 NotifyOfPropertyChange();
             }
         }
+
+        public void Save()
+        {
+            if (filename != "" && Collection.Count > 0)
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(BiAvler));
+                TextWriter writer = new StreamWriter(filename);
+                // Serialize all the agents.
+                serializer.Serialize(writer, Collection);
+                writer.Close();
+            }
+        }
+
+        public void SaveAs()
+        {
+            if (FileName != "")
+            {
+                filename = FileName;
+                
+            }
+            else
+                MessageBox.Show("You must enter a file name in the File Name textbox!", "Unable to save file",
+                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        //public void Close()
+        //{
+        //    Close();
+        //}
 
     }
 
