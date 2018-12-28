@@ -6,6 +6,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              Height="500" Width="800">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Georgia" />
+            <Setter Property="FontSize" Value="12" /> </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="27*"/>
@@ -54,8 +60,8 @@
                  
                      
         />
-        <Button Content="Add" x:Name="Add" HorizontalAlignment="Left" Margin="235,164,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Height="20"/>
-        <Label Content="FileName:" HorizontalAlignment="Left" Margin="55,222,0,0" VerticalAlignment="Top" Grid.Row="2"/>
+        <Button Content="Tilføj" x:Name="Add" HorizontalAlignment="Left" Margin="235,164,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Height="20"/>
+        <Label Content="Fil Navn:" HorizontalAlignment="Left" Margin="55,222,0,0" VerticalAlignment="Top" Grid.Row="2"/>
 
 
         <TextBox Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}"
@@ -66,7 +72,7 @@
                      
         />
         <Label Content="Søg efter bistade:" HorizontalAlignment="Left" Margin="15,275,0,0" VerticalAlignment="Top" Grid.Row="2"/>
-        <Button Content="Search" x:Name="Search" HorizontalAlignment="Left" Margin="301,281,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2"/>
+        <Button Content="Søg" x:Name="Search" HorizontalAlignment="Left" Margin="301,281,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2"/>
         <Image Grid.Row="3"  Source="Image/bee2.png"></Image>
 
 
