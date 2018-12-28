@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using Caliburn.Micro;
 using LiveCharts;
 using LiveCharts.Definitions.Series;
@@ -10,20 +11,25 @@ namespace BiavlerProjekt.Graph
 {
     public class GraphViewModel : PropertyChangedBase
     {
-        public GraphViewModel()
+        private BiAvlerViewModel BiAvlerViewModel { get; set; }
+        public GraphViewModel(BiAvlerViewModel biAvlerViewModel)
         {
-            BiAvler.Instance.PropertyChanged += Bi_PropertyChanged;
-        }
+            BiAvlerViewModel = biAvlerViewModel;
 
-        private void Bi_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(BiAvler.Instance.Bistade) && e.PropertyName == nameof(BiAvler.Instance.Count))
+            BiAvlerViewModel.PropertyChanged += test_PropertyChanged;
+
+       }
+
+        private void test_PropertyChanged(object sender, PropertyChangedEventArgs e)
+       {
+            if (e.PropertyName == nameof(BiAvlerViewModel.Collection))
             {
                 UpdateGraph();
             }
 
 
         }
+
 
         private string _labels;
         public string Labels
@@ -52,15 +58,15 @@ namespace BiavlerProjekt.Graph
 
         private void UpdateGraph()
         {
-            Labels = nameof(BiAvler.Instance.Bistade);
 
+            Labels = nameof(BiAvlerViewModel.Bistade1);
 
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
                     Title = "Hej",
-                    Values = nameof(BiAvler.Instance.Count).AsChartValues()
+                    Values = nameof(BiAvlerViewModel.Count1).AsChartValues()
                 }
             };
 
