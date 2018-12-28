@@ -5,50 +5,70 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Height="450" Width="800">
+             Height="500" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27*"/>
+            <RowDefinition/>
+            <RowDefinition Height="371*"/>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Menu Name="mainMenu" Margin="0,0,0,415">
+        <Menu Name="mainMenu" Margin="0,0,0,0.333" Grid.ColumnSpan="2">
             <MenuItem Header="_File" >
                 <MenuItem Header="_New" x:Name="New"/>
                 <MenuItem Header="_Open" x:Name="Open" />
-                <MenuItem Header="_Save" x:Name="Save"/>
-                <MenuItem Header="Save _As" x:Name="SaveAs" />
+                <MenuItem Header="_Save" x:Name="Save" />
+                <MenuItem Header="Save _As" x:Name="SaveAs"/>
                 <MenuItem Header="E_xit" x:Name="Close"/>
             </MenuItem>
         </Menu>
 
-        <Label Content="Bistade:" HorizontalAlignment="Left" Margin="55,40,0,0" VerticalAlignment="Top"/>
-        <Label Content="Dato:" HorizontalAlignment="Left" Margin="55,71,0,0" VerticalAlignment="Top"/>
-        <Label Content="Antal varroamider:" HorizontalAlignment="Left" Margin="55,102,0,0" VerticalAlignment="Top"/>
-        <Label Content="Bemærkninger:" HorizontalAlignment="Left" Margin="55,128,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="209,40,0,0" TextWrapping="Wrap" Text="{Binding Bistade1}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="209,71,0,0" TextWrapping="Wrap" Text="{Binding Date1}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="209,102,0,0" TextWrapping="Wrap" Text="{Binding Count1}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="209,128,0,0" TextWrapping="Wrap" Text="{Binding Text1}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Bistade:" HorizontalAlignment="Left" Margin="55,29,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26"/>
+        <Label Content="Dato:" HorizontalAlignment="Left" Margin="55,61,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26"/>
+        <Label Content="Antal varroamider:" HorizontalAlignment="Left" Margin="55,92,0,0" VerticalAlignment="Top" Grid.Row="2" Height="27"/>
+        <Label Content="Bemærkninger:" HorizontalAlignment="Left" Margin="55,119,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="209,29,0,0" TextWrapping="Wrap" Text="{Binding Bistade1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="209,61,0,0" TextWrapping="Wrap" Text="{Binding Date1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="209,92,0,0" TextWrapping="Wrap" Text="{Binding Count1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="209,119,0,0" TextWrapping="Wrap" Text="{Binding Text1, UpdateSourceTrigger=PropertyChanged }" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
 
-        <DataGrid Grid.Column="1" x:Name="Collection" HorizontalAlignment="Left" AutoGenerateColumns="False">
+        <DataGrid Grid.Column="1" x:Name="Collection" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="13,8.25,0,10" Width="377" Grid.Row="2" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Bistande" Binding="{Binding Bistade}"/>
-                <DataGridTextColumn Header="Dato" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Dato"  Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Varromide tæller" Binding="{Binding Count}"/>
                 <DataGridTextColumn Header="Bemærkninger" Binding="{Binding Text}"/>
             </DataGrid.Columns>
         </DataGrid>
 
 
-        <TextBox Text="{Binding FileName}"
+        <TextBox Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}"
                  FontSize="12"
                  VerticalAlignment="Center"
-                 MinWidth="100" Height="20" Margin="136,230,133,200"
+                 MinWidth="100" Height="20" Margin="136,229,133,123" Grid.Row="2"
+                 
                      
         />
-        <Button Content="Add" x:Name="Add" HorizontalAlignment="Left" Margin="118,316,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="FileName:" HorizontalAlignment="Left" Margin="55,225,0,0" VerticalAlignment="Top"/>
+        <Button Content="Add" x:Name="Add" HorizontalAlignment="Left" Margin="235,164,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Height="20"/>
+        <Label Content="FileName:" HorizontalAlignment="Left" Margin="55,222,0,0" VerticalAlignment="Top" Grid.Row="2"/>
+
+
+        <TextBox Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}"
+            FontSize="12"
+            VerticalAlignment="Center"
+            MinWidth="100" Height="20" Margin="136,282,133,70" Grid.Row="2"
+                 
+                     
+        />
+        <Label Content="Søg efter bistade:" HorizontalAlignment="Left" Margin="15,275,0,0" VerticalAlignment="Top" Grid.Row="2"/>
+        <Button Content="Search" x:Name="Search" HorizontalAlignment="Left" Margin="301,281,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2"/>
+        <Image Grid.Row="3"  Source="Image/bee2.png"></Image>
+
 
     </Grid>
 </UserControl>

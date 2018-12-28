@@ -2,16 +2,20 @@
 using Caliburn.Micro;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace BiavlerProjekt
 {
     public class BiAvlerViewModel : PropertyChangedBase
     {
-
+        private ICollectionView _dataGrCollectionView;
         private string _bistade;
         private string _date;
         private string _count;
@@ -19,6 +23,7 @@ namespace BiavlerProjekt
         private ObservableCollection<BiAvler> _collection = new ObservableCollection<BiAvler>();
         private string _fileName;
         string filename = "";
+        private string _searchName;
 
         public string FileName
         {
@@ -26,6 +31,16 @@ namespace BiavlerProjekt
             set
             {
                 _fileName = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+        public string SearchName
+        {
+            get => _searchName;
+            set
+            {
+                _searchName = value;
                 NotifyOfPropertyChange();
             }
         }
@@ -70,6 +85,26 @@ namespace BiavlerProjekt
             }
         }
 
+
+        public void Search()
+        {
+            ICollectionView cv = CollectionViewSource.GetDefaultView(Collection);
+
+            if (SearchName == "")
+                cv.Filter = null;
+            
+            else
+            {
+                cv.Filter = o =>
+                {
+                    BiAvler b = o as BiAvler;
+                    return b.Bistade.ToUpper().StartsWith(SearchName.ToUpper());
+                };
+
+            }
+
+        }
+        
         public void Add()
         {
             if (Bistade1 != null && Date1 != null && Count1 != null && Text1 != null)
@@ -94,7 +129,7 @@ namespace BiavlerProjekt
 
         public void Save()
         {
-            if (filename != "" && Collection.Count > 0)
+            if (filename != "" && Collection.Count > 0 && filename != null)
             {
 
 
@@ -103,6 +138,14 @@ namespace BiavlerProjekt
                 // Serialize all the agents.
                 serializer.Serialize(writer, Collection);
                 writer.Close();
+
+                FileName = null;
+                MessageBox.Show($"Your data was saved to file: {filename}");
+
+            }
+            else
+            {
+                MessageBox.Show("invalid filename. Try again!");
             }
         }
 
@@ -112,6 +155,7 @@ namespace BiavlerProjekt
             {
                 filename = FileName;
                 Save();
+                FileName = null;
 
             }
             else
@@ -122,7 +166,7 @@ namespace BiavlerProjekt
         public void Open()
         {
             filename = FileName;
-            ObservableCollection<BiAvler> tempAgents = new ObservableCollection<BiAvler>();
+            ObservableCollection<BiAvler> tempBi = new ObservableCollection<BiAvler>();
 
             // Create an instance of the XmlSerializer class and specify the type of object to serialize.
             XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<BiAvler>));
@@ -130,7 +174,7 @@ namespace BiavlerProjekt
             {
                 TextReader reader = new StreamReader(filename);
                 // Deserialize all the agents.
-                tempAgents = (ObservableCollection<BiAvler>) serializer.Deserialize(reader);
+                tempBi = (ObservableCollection<BiAvler>) serializer.Deserialize(reader);
                 reader.Close();
             }
             catch (Exception ex)
@@ -140,8 +184,12 @@ namespace BiavlerProjekt
 
             // We have to insert the agents in the existing collection. If we just assign tempAgents to agents then the bindings to agents will brake!
             Collection.Clear();
-            foreach (var agent in tempAgents)
-                Collection.Add(agent);
+            foreach (var bi in tempBi)
+                Collection.Add(bi);
+
+            FileName = null;
+
+
         }
 
         public void Close()
@@ -167,53 +215,5 @@ namespace BiavlerProjekt
             }
         }
 
-    }
-
-    public class BiAvler : PropertyChangedBase
-    {
-        private string _text;
-        private string _bistade;
-        private string _date;
-        private string _count;
-
-        public string Bistade
-        {
-            get => _bistade;
-            set
-            {
-                _bistade = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public string Date
-        {
-            get => _date;
-            set
-            {
-                _date = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public string Count
-        {
-            get => _count;
-            set
-            {
-                _count = value;
-                NotifyOfPropertyChange();
-            }
-        }
-
-        public string Text
-        {
-            get => _text;
-            set
-            {
-                _text = value;
-                NotifyOfPropertyChange();
-            }
-        }
     }
 }
