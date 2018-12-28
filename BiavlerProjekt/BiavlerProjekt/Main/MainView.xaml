@@ -11,10 +11,10 @@
 
         <TabControl Margin="2">
             <TabItem Header="Bi Avler">
-                <ContentControl cal:View.Model="{Binding BiAvlerViewModel}"/>
+                <ContentControl x:Name="BiAvlerViewModel"/>
             </TabItem>
             <TabItem Header="Graph">
-                <ContentControl cal:View.Model="{Binding GraphViewModel}"/>
+                <ContentControl x:Name="GraphViewModel"/>
             </TabItem>
         </TabControl>
 

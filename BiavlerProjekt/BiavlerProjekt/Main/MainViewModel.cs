@@ -8,11 +8,10 @@ using Caliburn.Micro;
 
 namespace BiavlerProjekt.Main
 {
-    public class MainViewModel
+    public class MainViewModel : Screen
     {
-
-        public BiAvlerViewModel BiAvlerViewModel { get; } = ModuleBootstrapper.Container.GetInstance<BiAvlerViewModel>();
-        public GraphViewModel GraphViewModel { get; } = ModuleBootstrapper.Container.GetInstance<GraphViewModel>();
+        public GraphViewModel GraphViewModel { get;} = Bootstrapper.Container.GetInstance<GraphViewModel>();
+        public BiAvlerViewModel BiAvlerViewModel { get; } = Bootstrapper.Container.GetInstance<BiAvlerViewModel>();
 
         public MainViewModel()
         {

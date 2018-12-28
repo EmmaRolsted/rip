@@ -79,12 +79,10 @@
       <DependentUpon>GraphView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graph\GraphViewModel.cs" />
-    <Compile Include="IModule.cs" />
     <Compile Include="Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main\MainViewModel.cs" />
-    <Compile Include="ModuleBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

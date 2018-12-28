@@ -1,14 +1,10 @@
-﻿using System;
-using Caliburn.Micro;
-using System.Collections.Generic;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace BiavlerProjekt
