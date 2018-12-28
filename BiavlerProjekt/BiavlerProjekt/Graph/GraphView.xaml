@@ -4,9 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BiavlerProjekt.Graph"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <GroupBox Header="Graph over Bistade og varromider antal skriv noget her emma" >
+            <lvc:CartesianChart Series="{Binding SeriesCollection}">
+                <lvc:CartesianChart.DataTooltip>
+                    <lvc:DefaultTooltip BulletSize="20" Background="#FF353535"/>
+                </lvc:CartesianChart.DataTooltip>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Antal varromider" LabelFormatter="{Binding YFormatter}" MinValue="0"/>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Bistade" Labels="{Binding Labels}" MinValue="0">
+                        <lvc:Axis.Separator>
+                            <lvc:Separator Step="1" />
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+        </GroupBox>
     </Grid>
 </UserControl>
