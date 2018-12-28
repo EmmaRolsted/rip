@@ -75,6 +75,16 @@
     <Compile Include="BiAvler.cs" />
     <Compile Include="BiAvlerViewModel.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Graph\GraphView.xaml.cs">
+      <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graph\GraphViewModel.cs" />
+    <Compile Include="IModule.cs" />
+    <Compile Include="Main\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main\MainViewModel.cs" />
+    <Compile Include="ModuleBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,6 +113,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="BiAvlerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graph\GraphView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Main\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
