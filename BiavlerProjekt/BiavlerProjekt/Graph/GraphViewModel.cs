@@ -17,7 +17,7 @@ namespace BiavlerProjekt.Graph
 
         private void Bi_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(BiAvler.Bistade) && e.PropertyName == nameof(BiAvler.Count))
+            if (e.PropertyName == nameof(BiAvler.Instance.Bistade) && e.PropertyName == nameof(BiAvler.Instance.Count))
             {
                 UpdateGraph();
             }
@@ -52,7 +52,7 @@ namespace BiavlerProjekt.Graph
 
         private void UpdateGraph()
         {
-            Labels = nameof(BiAvler.Bistade);
+            Labels = nameof(BiAvler.Instance.Bistade);
 
 
             SeriesCollection = new SeriesCollection
@@ -60,7 +60,7 @@ namespace BiavlerProjekt.Graph
                 new LineSeries
                 {
                     Title = "Hej",
-                    Values = nameof(BiAvler.Count).AsChartValues()
+                    Values = nameof(BiAvler.Instance.Count).AsChartValues()
                 }
             };
 
