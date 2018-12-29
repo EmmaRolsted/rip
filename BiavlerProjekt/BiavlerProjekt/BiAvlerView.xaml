@@ -25,7 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <Menu Name="mainMenu" Margin="0,0,0,0.333" Grid.ColumnSpan="2">
-            <MenuItem Header="_File" >
+            <MenuItem Header="_File">
                 <MenuItem Header="_New" x:Name="New"/>
                 <MenuItem Header="_Open" x:Name="Open" />
                 <MenuItem Header="_Save" x:Name="Save" />

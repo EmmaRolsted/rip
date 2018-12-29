@@ -8,8 +8,8 @@ namespace BiavlerProjekt.Graph
 {
     public class GraphViewModel : PropertyChangedBase
     {
-        private string _labels;
-        public string Labels
+        private string [] _labels;
+        public string [] Labels
         {
             get => _labels;
             set
@@ -48,7 +48,7 @@ namespace BiavlerProjekt.Graph
 
         private void UpdateGraph()
         {
-            Labels = BiAvler.Instance.Task.Bistade;
+            Labels = new string [] {BiAvler.Instance.Task.Bistade};
 
             SeriesCollection = new SeriesCollection
             {
