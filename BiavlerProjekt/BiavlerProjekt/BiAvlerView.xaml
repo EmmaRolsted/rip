@@ -20,11 +20,11 @@
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Menu Name="mainMenu" Margin="0,0,0,0.333" Grid.ColumnSpan="2">
+        <Menu Name="mainMenu" Margin="2" Grid.Column="0">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" x:Name="New"/>
                 <MenuItem Header="_Open" x:Name="Open" />
