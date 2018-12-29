@@ -1,36 +1,13 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using LiveCharts;
-using LiveCharts.Definitions.Series;
-using LiveCharts.Helpers;
 using LiveCharts.Wpf;
+using System;
+using System.ComponentModel;
 
 namespace BiavlerProjekt.Graph
 {
     public class GraphViewModel : PropertyChangedBase
     {
-        private BiAvlerViewModel BiAvlerViewModel { get; set; }
-        public GraphViewModel(BiAvlerViewModel biAvlerViewModel)
-        {
-            BiAvlerViewModel = biAvlerViewModel;
-
-            BiAvlerViewModel.PropertyChanged += test_PropertyChanged;
-
-       }
-
-        private void test_PropertyChanged(object sender, PropertyChangedEventArgs e)
-       {
-            if (e.PropertyName == nameof(BiAvlerViewModel.SelectedCollection))
-            {
-                UpdateGraph();
-            }
-
-
-        }
-
-
         private string _labels;
         public string Labels
         {
@@ -52,28 +29,37 @@ namespace BiavlerProjekt.Graph
             }
         }
 
-
-
         public Func<double, string> YFormatter { get; set; } = value => value.ToString("F");
+
+        private BiAvlerViewModel BiAvlerViewModel { get; set; }
+        public GraphViewModel(BiAvlerViewModel biAvlerViewModel)
+        {
+            BiAvlerViewModel = biAvlerViewModel;
+            BiAvler.Instance.PropertyChanged += test_PropertyChanged;
+        }
+
+        private void test_PropertyChanged(object sender, PropertyChangedEventArgs e)
+       {
+            if (e.PropertyName == "Task")
+            {
+                    UpdateGraph();   
+            }
+        }
 
         private void UpdateGraph()
         {
-
-            Labels = nameof(BiAvlerViewModel.SelectedCollection.Bistade);
+            Labels = BiAvler.Instance.Task.Bistade;
 
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Title = "Hej",
-                    Values = nameof(BiAvlerViewModel.SelectedCollection.Count).AsChartValues()
+                    Title = string.Empty,
+                    Values = new ChartValues<double> { BiAvler.Instance.Task.Count }
                 }
             };
 
+            YFormatter = value => value.ToString("N");
         }
-
-
-
-
     }
 }

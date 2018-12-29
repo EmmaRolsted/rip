@@ -1,13 +1,18 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 
 namespace BiavlerProjekt
 {
     public class BiAvler : PropertyChangedBase
     {
+        private static readonly Lazy<BiAvler> _instance = new Lazy<BiAvler>(() => new BiAvler());
+        public static BiAvler Instance => _instance.Value;
+
         private string _text;
         private string _bistade;
         private string _date;
-        private string _count;
+        private double _count;
+        private BiAvler _task;
 
         public string Bistade
         {
@@ -29,7 +34,7 @@ namespace BiavlerProjekt
             }
         }
 
-        public string Count
+        public double Count
         {
             get => _count;
             set
@@ -47,6 +52,17 @@ namespace BiavlerProjekt
                 _text = value;
                 NotifyOfPropertyChange();
             }
+        }
+
+        public BiAvler Task
+        {
+            get => _task;
+            set
+            {
+                _task = value;
+                NotifyOfPropertyChange();
+            }
+
         }
     }
 }

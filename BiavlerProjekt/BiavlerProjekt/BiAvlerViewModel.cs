@@ -11,10 +11,9 @@ namespace BiavlerProjekt
 {
     public class BiAvlerViewModel : PropertyChangedBase
     {
-        private ICollectionView _dataGrCollectionView;
         private string _bistade;
         private string _date;
-        private string _count;
+        private double _count;
         private string _text;
         private ObservableCollection<BiAvler> _collection = new ObservableCollection<BiAvler>();
         private string _fileName;
@@ -61,7 +60,7 @@ namespace BiavlerProjekt
             }
         }
 
-        public string Count1
+        public double Count1
         {
             get => _count;
             set
@@ -96,19 +95,17 @@ namespace BiavlerProjekt
                     BiAvler b = o as BiAvler;
                     return b.Bistade.ToUpper().StartsWith(SearchName.ToUpper());
                 };
-
             }
-
         }
         
         public void Add()
         {
-            if (Bistade1 != null && Date1 != null && Count1 != null && Text1 != null)
+            if (Bistade1 != null && Date1 != null && Count1 >= 0 && Text1 != null)
             {
                 Collection.Add(new BiAvler() {Bistade = Bistade1, Date = Date1, Count = Count1, Text = Text1});
                 Bistade1 = null;
                 Date1 = null;
-                Count1 = null;
+                Count1 = 0;
                 Text1 = null;
             }
         }
@@ -130,11 +127,9 @@ namespace BiavlerProjekt
             set
             {
                 _selectedCollection = value;
-                NotifyOfPropertyChange();
-            }
+                BiAvler.Instance.Task = _selectedCollection;
+            } 
         }
-
-
 
         public void Save()
         {
@@ -223,6 +218,5 @@ namespace BiavlerProjekt
                 filename = "";
             }
         }
-
     }
 }

@@ -13,7 +13,6 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-
         <GroupBox Header="Bi Avler">
             <ContentControl x:Name="BiAvlerViewModel"/>
         </GroupBox>

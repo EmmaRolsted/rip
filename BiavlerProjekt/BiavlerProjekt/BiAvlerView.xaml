@@ -43,7 +43,7 @@
         <TextBox HorizontalAlignment="Left" Height="24" Margin="209,92,0,0" TextWrapping="Wrap" Text="{Binding Count1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="209,119,0,0" TextWrapping="Wrap" Text="{Binding Text1, UpdateSourceTrigger=PropertyChanged }" VerticalAlignment="Top" Width="120" Grid.Row="2"/>
 
-        <DataGrid Grid.Column="1" x:Name="Collection" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="13,8.25,0,10" Width="377" Grid.Row="2" >
+        <DataGrid Grid.Column="1" x:Name="Collection" SelectedItem="{Binding SelectedCollection}" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="13,8.25,0,10" Width="377" Grid.Row="2" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Bistande" Binding="{Binding Bistade}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Dato"  Binding="{Binding Date}" IsReadOnly="True"/>
@@ -52,14 +52,11 @@
             </DataGrid.Columns>
         </DataGrid>
 
-
         <TextBox Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}"
                  FontSize="12"
                  VerticalAlignment="Center"
-                 MinWidth="100" Height="20" Margin="136,229,133,123" Grid.Row="2"
-                 
-                     
-        />
+                 MinWidth="100" Height="20" Margin="136,229,133,123" Grid.Row="2"/>
+
         <Button Content="Tilføj" x:Name="Add" HorizontalAlignment="Left" Margin="235,164,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Height="20"/>
         <Label Content="Fil Navn:" HorizontalAlignment="Left" Margin="55,222,0,0" VerticalAlignment="Top" Grid.Row="2"/>
 
@@ -67,13 +64,11 @@
         <TextBox Text="{Binding SearchName, UpdateSourceTrigger=PropertyChanged}"
             FontSize="12"
             VerticalAlignment="Center"
-            MinWidth="100" Height="20" Margin="136,282,133,70" Grid.Row="2"
-                 
-                     
-        />
+            MinWidth="100" Height="20" Margin="136,282,133,70" Grid.Row="2"/>
+
         <Label Content="Søg efter bistade:" HorizontalAlignment="Left" Margin="15,275,0,0" VerticalAlignment="Top" Grid.Row="2"/>
         <Button Content="Søg" x:Name="Search" HorizontalAlignment="Left" Margin="301,281,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2"/>
-        <Image Grid.Row="3"  Source="Image/bee2.png"></Image>
+        <Image Grid.Row="3"  Source="Image/bee2.png"/>
 
 
     </Grid>
