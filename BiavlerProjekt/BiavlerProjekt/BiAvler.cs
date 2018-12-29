@@ -1,15 +1,9 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 
 namespace BiavlerProjekt
 {
     public class BiAvler : PropertyChangedBase
     {
-
-        private static readonly Lazy<BiAvler> _instance = new Lazy<BiAvler>(()=> new BiAvler());
-
-        public static BiAvler Instance => _instance.Value;
-
         private string _text;
         private string _bistade;
         private string _date;

@@ -8,15 +8,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-        <TabControl Margin="2">
-            <TabItem Header="Bi Avler">
-                <ContentControl x:Name="BiAvlerViewModel"/>
-            </TabItem>
-            <TabItem Header="Graph">
-                <ContentControl x:Name="GraphViewModel"/>
-            </TabItem>
-        </TabControl>
+
+        <GroupBox Header="Bi Avler">
+            <ContentControl x:Name="BiAvlerViewModel"/>
+        </GroupBox>
+
+        <GroupBox Header="Graph" Grid.Column="1">
+            <ContentControl x:Name="GraphViewModel"/>
+        </GroupBox>
 
     </Grid>
 </UserControl>

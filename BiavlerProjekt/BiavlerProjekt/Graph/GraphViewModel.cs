@@ -22,7 +22,7 @@ namespace BiavlerProjekt.Graph
 
         private void test_PropertyChanged(object sender, PropertyChangedEventArgs e)
        {
-            if (e.PropertyName == nameof(BiAvlerViewModel.Collection))
+            if (e.PropertyName == "Collection")
             {
                 UpdateGraph();
             }

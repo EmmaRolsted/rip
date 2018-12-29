@@ -106,6 +106,7 @@ namespace BiavlerProjekt
             if (Bistade1 != null && Date1 != null && Count1 != null && Text1 != null)
             {
                 Collection.Add(new BiAvler() {Bistade = Bistade1, Date = Date1, Count = Count1, Text = Text1});
+                NotifyOfPropertyChange(()=>Collection);
                 Bistade1 = null;
                 Date1 = null;
                 Count1 = null;
