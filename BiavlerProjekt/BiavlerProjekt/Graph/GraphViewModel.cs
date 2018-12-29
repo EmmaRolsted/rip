@@ -22,7 +22,7 @@ namespace BiavlerProjekt.Graph
 
         private void test_PropertyChanged(object sender, PropertyChangedEventArgs e)
        {
-            if (e.PropertyName == "Collection")
+            if (e.PropertyName == nameof(BiAvlerViewModel.SelectedCollection))
             {
                 UpdateGraph();
             }
@@ -59,14 +59,14 @@ namespace BiavlerProjekt.Graph
         private void UpdateGraph()
         {
 
-            Labels = nameof(BiAvlerViewModel.Bistade1);
+            Labels = nameof(BiAvlerViewModel.SelectedCollection.Bistade);
 
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
                     Title = "Hej",
-                    Values = nameof(BiAvlerViewModel.Count1).AsChartValues()
+                    Values = nameof(BiAvlerViewModel.SelectedCollection.Count).AsChartValues()
                 }
             };
 
