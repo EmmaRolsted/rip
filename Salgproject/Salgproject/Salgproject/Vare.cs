@@ -6,7 +6,7 @@ namespace Salgproject
 {
     public class Vare : PropertyChangedBase
     {
-        [Key]
+
         public int ItemNumber { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }

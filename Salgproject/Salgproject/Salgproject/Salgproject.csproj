@@ -77,7 +77,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DbAccess.cs" />
     <Compile Include="Migrations\201812311121508_Initial.cs" />
     <Compile Include="Migrations\201812311121508_Initial.Designer.cs">
       <DependentUpon>201812311121508_Initial.cs</DependentUpon>
