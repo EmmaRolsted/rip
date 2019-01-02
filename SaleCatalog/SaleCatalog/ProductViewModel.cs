@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
 using Caliburn.Micro;
@@ -14,7 +11,7 @@ namespace SaleCatalog
 {
     class ProductViewModel : PropertyChangedBase
     {
-        private readonly ICollectionView _collectionView;
+        //private readonly ICollectionView _collectionView;
         private ObservableCollection<Product> _collection = new ObservableCollection<Product>();
         private ObservableCollection<Product> _saleCollection = new ObservableCollection<Product>();
         private string _fileName;
@@ -34,7 +31,17 @@ namespace SaleCatalog
         private string _unitPrice;
         private string _paymentMethod;
         private string _cash;
+        private string _totalPrice;
 
+        public string TotalPrice
+        {
+            get => _totalPrice;
+            set
+            {
+                _totalPrice = value;
+                NotifyOfPropertyChange();
+            }
+        }
         public string Cash
         {
             get => _cash;
@@ -268,8 +275,8 @@ namespace SaleCatalog
                 MessageBox.Show(ex.Message, "Unable to open file", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
-            //SaleCollection.Clear();
-            foreach (var sale in SaleCollection)
+            SaleCollection.Clear();
+            foreach (var sale in products)
                 SaleCollection.Add(sale);
             
 
@@ -323,7 +330,25 @@ namespace SaleCatalog
                 Number = null;
                 Name = null;
                 Price = null;
+
+                Update();
             }
+        }
+
+        public void CalculatePrice()
+        {
+            var testPrice = 0;
+
+            foreach (var product in CollectionProducts)
+            {
+                if (product.ProductName == _selectedProduct)
+                {
+                    testPrice = int.Parse(product.ProductPrice);
+                    TotalPrice = (testPrice * _amount).ToString();
+                }
+
+            }
+
         }
 
         public void Buy()
@@ -339,17 +364,19 @@ namespace SaleCatalog
                         //_unitPrice = product.ProductPrice;
                     }
                 }
-
-                SaleCollection.Add(new Product() { SelectedProduct = Selected, ProductName = Selected, Amount = Quantity, PaymentMethod = Payment, UnitPrice = testPrice.ToString()});
                 
                 var price = testPrice *_amount;
 
                 if (Payment == "MobilePay")
                 {
-                    MessageBox.Show($"You bought {_amount} {_selectedProduct} using {_paymentMethod}.\n " +
-                                    $"Price: {price} kr. \n" +
-                                    $"Received amount: {price} kr. \n" +
-                                    $"Return amount:   0       kr.");
+                    SaleCollection.Add(new Product() { SelectedProduct = Selected, ProductName = Selected, Amount = Quantity, PaymentMethod = Payment, UnitPrice = testPrice.ToString() });
+
+                    MessageBox.Show("Payment information:\n" +
+                                    $"Amount: {_amount}.\n" +
+                                    $"Product: {_selectedProduct}.\n" +
+                                    $"Payment method: {_paymentMethod}.\n" +
+                                    "\n\n" +
+                                    "Return amount:   0       kr.");
 
                 }
 
@@ -357,16 +384,33 @@ namespace SaleCatalog
                 if( Payment =="Cash")
                 {
                     var cash = int.Parse(_cash);
-                    MessageBox.Show($"You bought {_amount} {_selectedProduct} using {_paymentMethod}.\n " +
-                                    $"Price: {price} kr. \n" +
-                                    $"Received amount: {Cash} kr. \n" +
-                                    $"Return amount: {cash-price} kr.");
+
+                    if (cash < price)
+                    {
+                        MessageBox.Show($"Not enough money. The price is: {price} kr.\n Try again!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Payment information:\n" +
+                                        $"Amount: {_amount}.\n" +
+                                        $"Product: {_selectedProduct}.\n" +
+                                        $"Payment method: {_paymentMethod}.\n" +
+                                        "\n\n" +
+                                        $"Price: {price} kr. \n" +
+                                        $"Received amount: {Cash} kr. \n" +
+                                        $"Return amount: {cash - price} kr.");
+                        SaleCollection.Add(new Product() { SelectedProduct = Selected, ProductName = Selected, Amount = Quantity, PaymentMethod = Payment, UnitPrice = testPrice.ToString() });
+
+
+                    }
+
 
                 }
 
                 Selected = null;
                 Quantity = 0;
                 Payment = null;
+                TotalPrice = null;
             }
         }
         public void Update()
@@ -375,8 +419,30 @@ namespace SaleCatalog
             foreach (var product in CollectionProducts)
             {
                 ProductBox.Add(product.ProductName);
+
+            }
+            
+        }
+
+        public void Delete()
+        {
+
+            if (CollectionProducts != null)
+            {
+                foreach (var product in CollectionProducts)
+                {
+                    _collection.Remove(product);
+                }
+
             }
 
+            //if (_collection != null)
+            //{
+            //    foreach (var product in _collection)
+            //    {
+            //        CollectionProducts.Remove(product);
+            //    }
+            //}
         }
     }
 }

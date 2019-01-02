@@ -25,17 +25,24 @@
                      MinWidth="100" Height="18" Margin="0,4,0,3.333" Width="124" />
         </ToolBar>
         <Menu Grid.ColumnSpan="2">
-            <MenuItem Header="_File" >
+            <MenuItem Header="Catalog" >
                 <MenuItem Header="_New" x:Name="New"/>
                 <MenuItem Header="_Open" x:Name="Open" />
                 <MenuItem Header="_Save" x:Name="Save" />
                 <MenuItem Header="Save _As" x:Name="SaveAs"/>
                 <MenuItem Header="E_xit" x:Name="Close"/>
             </MenuItem>
+            <MenuItem Header="Sales" >
+                <MenuItem Header="_New" x:Name="NewSale"/>
+                <MenuItem Header="_Open" x:Name="OpenSale" />
+                <MenuItem Header="_Save" x:Name="SaveSale" />
+                <MenuItem Header="Save _As" x:Name="SaveAsSale"/>
+
+            </MenuItem>
 
 
         </Menu>
-        <Label Content="Productnumber:" HorizontalAlignment="Left" Margin="55,49,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="Product number:" HorizontalAlignment="Left" Margin="55,49,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="55,86,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         <Label Content="Price:" HorizontalAlignment="Left" Margin="55,126,0,0" Grid.Row="1" VerticalAlignment="Top"/>
@@ -48,7 +55,7 @@
 
 
 
-        <DataGrid x:Name="CollectionProducts" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="106,50.667,0,35.333" Width="211" Grid.Row="1" Grid.Column="1" >
+        <DataGrid x:Name="CollectionProducts" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="31,50.667,0,35.333" Width="211" Grid.Row="1" Grid.Column="1" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ProductNumber" Binding="{Binding ProductNumber}"/>
                 <DataGridTextColumn Header="Name"  Binding="{Binding ProductName}"/>
@@ -57,7 +64,7 @@
         </DataGrid>
         <!--<TextBox HorizontalAlignment="Left" Height="24" Margin="547,49,0,0" TextWrapping="Wrap" Text="{Binding FileName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.915,4.135" Grid.Row="1"/>-->
         <!--<Label Content="Filename:" HorizontalAlignment="Left" Margin="418,49,0,0"  VerticalAlignment="Top" Width="75" Height="24" Grid.Row="1"/>-->
-        <Button Grid.Column="0" Content="Update" x:Name="Update" HorizontalAlignment="Left" Margin="268,166,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1" Height="20" RenderTransformOrigin="-0.729,3.429"/>
+        <Button Grid.Column="0" Content="Update" x:Name="Update" HorizontalAlignment="Left" Margin="304,97.667,0,0" VerticalAlignment="Top" Width="86" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
 
         <Label Content="Create new sale, please choose the wanted product!" Grid.Column="0" Margin="10,5,81,212" Grid.Row="2"/>
         <Label Content="Quantity:" HorizontalAlignment="Left" Margin="38,60.667,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top"/>
@@ -71,7 +78,7 @@
             <ComboBoxItem>4</ComboBoxItem>
             <ComboBoxItem>5</ComboBoxItem>
         </ComboBox>
-        <ComboBox Grid.Column="0" x:Name="ProductBox" Text="{Binding Selected}" Margin="167,92.667,113,154" Grid.Row="2" Width="120"/>
+        <ComboBox Grid.Column="0" x:Name="ProductBox" Margin="167,92.667,113,154" Grid.Row="2" Width="120" Text="{Binding Selected}"/>
         <ComboBox Grid.Column="0" x:Name="PaymentBox" Text="{Binding Payment}" Margin="167,125.667,113,123" Grid.Row="2" Width="120">
             <ComboBoxItem>MobilePay</ComboBoxItem>
             <ComboBoxItem>Cash</ComboBoxItem>
@@ -87,14 +94,11 @@
                 <DataGridTextColumn Header="Payment Method" Binding="{Binding PaymentMethod}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="0" Content="Buy" x:Name="Buy" HorizontalAlignment="Left" Margin="304,229.667,0,0" VerticalAlignment="Top" Width="75" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
+        <Button Grid.Column="0" Content="Buy" x:Name="Buy" HorizontalAlignment="Left" Margin="304,229.667,0,0" VerticalAlignment="Top" Width="80" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
         <Label Content="Price:" HorizontalAlignment="Left" Margin="38,158.667,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top"/>
-        
-        <Button Grid.Column="1" Content="New" x:Name="NewSale" HorizontalAlignment="Left" Margin="20,229.667,0,0" VerticalAlignment="Top" Width="76" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
-        <Button Grid.Column="1" Content="Open" x:Name="OpenSale" HorizontalAlignment="Left" Margin="112,229.667,0,0" VerticalAlignment="Top" Width="76" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
-        <Button Grid.Column="1" Content="Save" x:Name="SaveSale" HorizontalAlignment="Left" Margin="208,229.667,0,0" VerticalAlignment="Top" Width="76" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
-        <Button Grid.Column="1" Content="Save As" x:Name="SaveAsSale" HorizontalAlignment="Left" Margin="302,229.667,0,0" VerticalAlignment="Top" Width="76" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
 
-
+        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="169,158.667,0,0" Grid.Row="2" TextWrapping="Wrap" Text="{Binding TotalPrice}" VerticalAlignment="Top" Width="118" Height="27"/>
+        <Button Grid.Column="0" Content="Calculate price" x:Name="CalculatePrice" HorizontalAlignment="Left" Margin="304,164.667,0,0" VerticalAlignment="Top" Width="86" Grid.Row="2" Height="20" RenderTransformOrigin="-0.729,3.429"/>
+        <Button Content="Delete" x:Name="Delete" HorizontalAlignment="Left" Margin="279,54.667,0,0" VerticalAlignment="Top" Width="76" Grid.Row="1" Height="20" RenderTransformOrigin="-0.729,3.429" Grid.Column="1"/>
     </Grid>
 </UserControl>
