@@ -55,7 +55,7 @@
 
 
 
-        <DataGrid x:Name="CollectionProducts" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="31,50.667,0,35.333" Width="211" Grid.Row="1" Grid.Column="1" >
+        <DataGrid x:Name="CollectionProducts" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="31,50.667,0,35.333" Width="211" Grid.Row="1" Grid.Column="1" SelectedItem="{Binding SeletedCollectionProduct}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ProductNumber" Binding="{Binding ProductNumber}"/>
                 <DataGridTextColumn Header="Name"  Binding="{Binding ProductName}"/>

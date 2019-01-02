@@ -424,15 +424,26 @@ namespace SaleCatalog
             
         }
 
+        private Product _selectedCollectionProduct;
+        public Product SeletedCollectionProduct
+        {
+            get => _selectedCollectionProduct;
+            set
+            {
+                _selectedCollectionProduct = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+
         public void Delete()
         {
 
-            if (CollectionProducts != null)
+            if (_selectedCollectionProduct != null)
             {
-                foreach (var product in CollectionProducts)
-                {
-                    _collection.Remove(product);
-                }
+               
+                    _collection.Remove(_selectedCollectionProduct);
+
 
             }
 
