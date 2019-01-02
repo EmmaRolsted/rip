@@ -48,8 +48,8 @@
         <Label Content="Price:" HorizontalAlignment="Left" Margin="55,126,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
         <TextBox HorizontalAlignment="Left" Height="24" Margin="184,51,0,0" TextWrapping="Wrap" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.915,4.135" Grid.Row="1"/>
-        <TextBox HorizontalAlignment="Left" Height="24" Margin="184,128,0,0" TextWrapping="Wrap" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.915,4.135" Grid.Row="1"/>
         <TextBox HorizontalAlignment="Left" Height="24" Margin="184,87,0,0" TextWrapping="Wrap" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.915,4.135" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="184,128,0,0" TextWrapping="Wrap" Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.915,4.135" Grid.Row="1"/>
 
         <Button Content="Add" x:Name="Add" HorizontalAlignment="Left" Margin="146,166,0,0" VerticalAlignment="Top" Width="76" Grid.Row="1" Height="20" RenderTransformOrigin="-0.729,3.429"/>
 

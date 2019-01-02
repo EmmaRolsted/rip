@@ -446,14 +446,6 @@ namespace SaleCatalog
 
 
             }
-
-            //if (_collection != null)
-            //{
-            //    foreach (var product in _collection)
-            //    {
-            //        CollectionProducts.Remove(product);
-            //    }
-            //}
         }
     }
 }
